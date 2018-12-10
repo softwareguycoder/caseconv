@@ -1,9 +1,9 @@
-Program: Case Converter
+# Program: Case Converter
 
-Problem to be solved:
+## Problem to be solved:
 	Convert any lowercase characters in a data file to uppercase.
 
-Bounds of the solution:
+## Bounds of the solution:
 	- We will be working under Linux.
 	- The data exists in disk files.
 	- We do not know ahead of time how large any of the files will be.
@@ -17,24 +17,29 @@ Bounds of the solution:
 	  file (that's because, if the process crashes, we've destroyed the
 	  original file without completely generating an output file.)
 
-Pseudo-code:
+## Pseudo-code:
 
+```
 	Read a character from the input file.
 	Convert the character to uppercase (if necessary).
 	Write the character to the output file.
 	Repeat until done.
+```
 
-Successive refinement:
+## Successive refinement:
 	
+```
 	Read a character from standard input (stdin).
 	Test the character to see if it's a lowercase letter.
 	If the character is a lowercase letter, convert it to a uppercase letter by subtracting 20h.
 	Write the character to standard output (stdout).
 	Repeat until done.
 	Exit the program by calling sys_exit.
+```
 
-Expanded (and slightly rearranged) pseudo-code:
-	
+## Expanded (and slightly rearranged) pseudo-code:
+
+```	
 	Read a character from the standard input (stdin).
 	Test if we have reached End Of File (EOF).
 	If we have reached EOF, we're done, so jump to exit
@@ -43,9 +48,11 @@ Expanded (and slightly rearranged) pseudo-code:
 	Write the character to standard output (stdout).
 	Go back and read another character.
 	Exit the program by calling sys_exit.
+```
 
-Adding labels to the groups of statements so it looks like we have jump targets:
-	
+## Adding labels to the groups of statements so it looks like we have jump targets:
+
+```	
 Read:
 	Set up registers for the sys_read kernel call
 	Call sys_read to read from stdin
@@ -64,4 +71,4 @@ Write:
 Exit:
 	Set up registers for terminating the program via sys_exit.
 	Call sys_exit.
-
+```
