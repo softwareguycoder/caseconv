@@ -1,9 +1,11 @@
 # Program: Case Converter
 
-## Problem to be solved:
+This program is written in Assembly with NASM on Linux (x86) and is supposed to be a minimal useful program in Assembly.  Thanks for to Jeff Duntemann for the code.  This comes from his excellent book, "Assembly Language Step-by-Step: Programming with Linux, 3rd ed" (John Wiley & Sons, 2009).
+
+## Problem to be solved
 Convert any lowercase characters in a data file to uppercase.
 
-## Bounds of the solution:
+## Bounds of the solution
 - We will be working under Linux.
 - The data exists in disk files.
 - We do not know ahead of time how large any of the files will be.
@@ -17,7 +19,8 @@ Convert any lowercase characters in a data file to uppercase.
   file (that's because, if the process crashes, we've destroyed the
   original file without completely generating an output file.)
 
-## Pseudo-code:
+## Pseudo-code
+### First pass at psuedo-code
 
 ```
 	Read a character from the input file.
@@ -26,7 +29,7 @@ Convert any lowercase characters in a data file to uppercase.
 	Repeat until done.
 ```
 
-## Successive refinement:
+### Successive refinement
 	
 ```
 	Read a character from standard input (stdin).
@@ -37,7 +40,7 @@ Convert any lowercase characters in a data file to uppercase.
 	Exit the program by calling sys_exit.
 ```
 
-## Expanded (and slightly rearranged) pseudo-code:
+### Expanded (and slightly rearranged) pseudo-code
 
 ```	
 	Read a character from the standard input (stdin).
@@ -50,7 +53,7 @@ Convert any lowercase characters in a data file to uppercase.
 	Exit the program by calling sys_exit.
 ```
 
-## Adding labels to the groups of statements so it looks like we have jump targets:
+### Adding labels to the groups of statements so it looks like we have jump targets:
 
 ```	
 Read:
