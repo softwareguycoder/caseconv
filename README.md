@@ -75,3 +75,12 @@ Exit:
 	Set up registers for terminating the program via sys_exit.
 	Call sys_exit.
 ```
+## How to run this program
+To test the executable produced when this program is compiled, use I/O redirection, as follows:
+### Sample command line
+```
+./caseconv > outputfile < inputfile
+```
+where `inputfile` and `outputfile` are the names of two ASCII text files.  The inputfile must exist
+prior to the execution of the program; however, if the outputfile does not exist, it will be created.  If
+an outputfile already exists, it is overwritten.
