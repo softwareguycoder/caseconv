@@ -123,3 +123,38 @@ Exit:
 	Set up registers for terminating the program via sys_exit.
 	Call sys_exit.
 ```
+For the next refinement, we should explicitly say how the buffer pointer gets set up for the scanning process,
+and what registers do what:
+```
+Read:
+	Set up registers for the sys_read kernel call.
+	Call sys_read to read a buffer full of characters from stdin.
+	Test for EOF (eax = 0).
+	If we're at EOF, jump to Exit.
+
+	Put the address of the buffer in ebp.
+	Put the number of characters read in to the buffer in ecx.
+Scan:
+	Test the character at the buffer pointer to see if it's a lowercase letter.
+	Compare the byte at `[ebp+ecx]` against 'a'.
+	If it's not a lowercase letter, skip conversion.
+	(If the byte is below 'a' in the ASCII sequence, jump to Next.)
+	Compare the byte at `[ebp+ecx]` against 'z'.
+	(If the byte is above 'z' in the ASCII sequence, jump to Next.)
+	Subtract 20h from the byte at `[ebp+ecx]`.
+	(Convert the current letter to uppercase by subtracting 20h from its ASCII character code.)
+Next:	Decrement ecx by one.'
+	Jump if not zero to Scan.
+
+Write:
+	Set up registers for the sys_write kernel call.
+	Call sys_write to write the processed buffer to stdout.
+	Jump back to Read and get another buffer full of characters.
+
+Exit:
+	Set up registers for terminating the program via sys_exit.
+	Call sys_exit.
+```
+Remember, `EBP+ECX`, initially, will reference a spot PAST the end of the buffer into unused (we hope)
+memory -- however, as we scan, the very first character of the buffer will remain un-examined.  So, we need
+to make sure to `DEC EBP` PRIOR to beginning the scan.
