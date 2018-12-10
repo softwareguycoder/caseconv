@@ -1,21 +1,21 @@
 # Program: Case Converter
 
 ## Problem to be solved:
-	Convert any lowercase characters in a data file to uppercase.
+Convert any lowercase characters in a data file to uppercase.
 
 ## Bounds of the solution:
-	- We will be working under Linux.
-	- The data exists in disk files.
-	- We do not know ahead of time how large any of the files will be.
-	- There is no maximum or minimum size for the files.
-	- We will use I/O redirection to pass filenames to the program.
-	- All the input files are in the same encoding scheme.  The program
-	  can assume that an "a" character in one file is encoded the same way 
-	  as an "a" in another file.  (In our case, this is ASCII.)
-	- We must preserve the original file in its original form, rather than 
-	  read data from the original file and then write it back to the original
-	  file (that's because, if the process crashes, we've destroyed the
-	  original file without completely generating an output file.)
+- We will be working under Linux.
+- The data exists in disk files.
+- We do not know ahead of time how large any of the files will be.
+- There is no maximum or minimum size for the files.
+- We will use I/O redirection to pass filenames to the program.
+- All the input files are in the same encoding scheme.  The program
+  can assume that an "a" character in one file is encoded the same way 
+  as an "a" in another file.  (In our case, this is ASCII.)
+- We must preserve the original file in its original form, rather than 
+  read data from the original file and then write it back to the original
+  file (that's because, if the process crashes, we've destroyed the
+  original file without completely generating an output file.)
 
 ## Pseudo-code:
 
