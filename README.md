@@ -84,3 +84,42 @@ To test the executable produced when this program is compiled, use I/O redirecti
 where `inputfile` and `outputfile` are the names of two ASCII text files.  The inputfile must exist
 prior to the execution of the program; however, if the outputfile does not exist, it will be created.  If
 an outputfile already exists, it is overwritten.
+
+## Next steps
+
+### Scanning a buffer
+
+The program needs error handling, which in this case mostly involves testing the return values from `sys_read` and
+displaying meaningful messages on the Linux console.  There's no technical difference between displaying error
+messages and displaying slogans for greasy-spoon diners, so you can add error handling yourself as an exercise.
+
+The more interesting challenge, howver, involves buffered file I/O.  The Unix read and write kernel calls are 
+buffer-oriented and not character-oriented, so we have to recast our psuedo-code to fill buffers with characters,
+and then process the buffers.
+
+Let's go back to the psuedo-code and give it a try:
+```
+Read:
+	Set up registers for the sys_read kernel call.
+	Call sys_read to read a buffer full of characters from stdin.
+	Test for EOF.
+	If we're at EOF, jump to Exit.
+
+	Set up registers as a pointer to scan the buffer (by the time sys_read
+	is done, pointer will be set at the end of the -- now filled -- buffer).
+Scan:
+	Test the character at the buffer pointer to see if it's a lowercase letter.
+	If it's not a lowercase letter, skip conversion.
+	Convert the current letter to uppercase by subtracting 20h from its ASCII character code.
+	Decrement the buffer pointer.
+	If we still have characters in the buffer, jump to Scan.
+
+Write:
+	Set up registers for the sys_write kernel call.
+	Call sys_write to write the processed buffer to stdout.
+	Jump back to Read and get another buffer full of characters.
+
+Exit:
+	Set up registers for terminating the program via sys_exit.
+	Call sys_exit.
+```
